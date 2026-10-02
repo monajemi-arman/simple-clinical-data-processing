@@ -1,0 +1,6 @@
+patient_id,med_code,med_name,dose,frequency,list_date,status
+P1007,MED-17,Rivaroxaban,20 mg,daily,2025-11-03,active
+P1007,MED-02,Metoprolol tartrate,50 mg,BID,2025-11-03,active
+P1008,MED-31,Warfarin,5mg,OD,2026-02-10,active
+P1009,MED-88,Zz-Kardio forte,1 tab,TID,2026-01-05,active
+P1010,MED-05,Lisinopril,10 mg,qd,2026-03-14,active

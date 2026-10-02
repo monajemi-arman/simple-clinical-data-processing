@@ -1,0 +1,15 @@
+Document N-205, recorded 2026-08-12
+Patient: P1008   DOB: 1968-04-17   Encounter: E-88230
+Author: Dr. B. Sample   Clinic phone: 555-0142   MRN 000-5521
+Patient name on file: Jane Q. Testpatient
+
+58 y/o F seen for follow-up of anaemia. No fever. Denies cough.
+Possible pneumonia on chest X-ray, awaiting radiology read.
+Mother had breast cancer. History of appendectomy in 2009.
+Allergic to penicillin (rash).
+Takes warfarin 5 mg daily; patient states she stopped it last month.
+Hb 11.8 on 11 Aug. Last INR 2.4 on 31 Feb 2026.
+Plan: repeat Hb in 2 weeks; colonoscopy scheduled for 2026-09-20.
+
+PATIENT EDUCATION (standard leaflet text): Warfarin may cause bleeding.
+Call your doctor if you have chest pain, black stools or shortness of breath.

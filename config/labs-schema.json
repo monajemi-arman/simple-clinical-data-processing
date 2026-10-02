@@ -1,0 +1,33 @@
+{
+    "title": "LabRow",
+    "type": "object",
+    "required": ["patient_id", "test_code", "test_name", "result_value", "result_unit", "result_time"],
+    "properties": {
+        "patient_id": {
+            "type": "string",
+            "description": "Patient identifier"
+        },
+        "test_code": {
+            "type": "string",
+            "description": "Lab test code (e.g. LAB-44)"
+        },
+        "test_name": {
+            "type": "string",
+            "description": "Short display name for the test"
+        },
+        "result_value": {
+            "type": ["string", "number", "null"],
+            "description": "Numeric result or free-text status (e.g. 'pending')"
+        },
+        "result_unit": {
+            "type": ["string", "null"],
+            "description": "Unit of measure; may be empty"
+        },
+        "result_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC ISO-8601 timestamp of the result"
+        }
+    },
+    "additionalProperties": false
+}

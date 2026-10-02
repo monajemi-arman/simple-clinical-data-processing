@@ -1,0 +1,145 @@
+{
+    "title": "ClinicalOutput",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "patient",
+        "encounter",
+        "facts",
+        "quality"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "description": "Schema version"
+        },
+        "patient": {
+            "type": "object",
+            "required": ["source_patient_id", "birth_date"],
+            "properties": {
+                "source_patient_id": {
+                    "type": ["string", "null"]
+                },
+                "birth_date": {
+                    "type": ["string", "null"],
+                    "format": "date"
+                }
+            },
+            "additionalProperties": false
+        },
+        "encounter": {
+            "type": "object",
+            "required": ["source_encounter_id", "event_time"],
+            "properties": {
+                "source_encounter_id": {
+                    "type": ["string", "null"]
+                },
+                "event_time": {
+                    "type": ["string", "null"],
+                    "format": "date-time"
+                }
+            },
+            "additionalProperties": false
+        },
+        "facts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "category",
+                    "concept",
+                    "value",
+                    "assertion",
+                    "temporality",
+                    "effective_time",
+                    "source_ref",
+                    "extraction_method",
+                    "review_status"
+                ],
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "enum": [
+                            "medication",
+                            "condition",
+                            "observation",
+                            "symptom",
+                            "procedure"
+                        ]
+                    },
+                    "concept": {
+                        "type": "object",
+                        "required": ["system", "code", "display"],
+                        "properties": {
+                            "system": {"type": ["string", "null"]},
+                            "code": {"type": ["string", "null"]},
+                            "display": {"type": ["string", "null"]}
+                        },
+                        "additionalProperties": false
+                    },
+                    "value": {
+                        "type": "object",
+                        "required": ["number", "text", "unit"],
+                        "properties": {
+                            "number": {"type": ["number", "null"]},
+                            "text": {"type": ["string", "null"]},
+                            "unit": {"type": ["string", "null"]}
+                        },
+                        "additionalProperties": false
+                    },
+                    "assertion": {
+                        "type": "string",
+                        "enum": ["present", "absent", "uncertain"]
+                    },
+                    "temporality": {
+                        "type": "string",
+                        "enum": ["current", "historical", "planned", "unknown"]
+                    },
+                    "effective_time": {
+                        "type": ["string", "null"]
+                    },
+                    "source_ref": {
+                        "type": "object",
+                        "required": ["document_id", "field_path", "text_span"],
+                        "properties": {
+                            "document_id": {"type": ["string", "null"]},
+                            "field_path": {"type": ["string", "null"]},
+                            "text_span": {"type": ["string", "null"]}
+                        },
+                        "additionalProperties": false
+                    },
+                    "extraction_method": {
+                        "type": "string",
+                        "enum": ["rule", "dictionary", "terminology", "model"]
+                    },
+                    "review_status": {
+                        "type": "string",
+                        "enum": ["accepted", "needs_review", "rejected"]
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "quality": {
+            "type": "object",
+            "required": ["missing_required", "conflicts", "warnings"],
+            "properties": {
+                "missing_required": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                },
+                "conflicts": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

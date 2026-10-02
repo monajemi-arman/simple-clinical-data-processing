@@ -1,0 +1,38 @@
+{
+    "title": "MedRow",
+    "type": "object",
+    "required": ["patient_id", "med_code", "med_name", "dose", "frequency", "list_date", "status"],
+    "properties": {
+        "patient_id": {
+            "type": "string",
+            "description": "Patient identifier"
+        },
+        "med_code": {
+            "type": "string",
+            "description": "Medication code (e.g. MED-17)"
+        },
+        "med_name": {
+            "type": "string",
+            "description": "Medication display name"
+        },
+        "dose": {
+            "type": "string",
+            "description": "Dose as a free-text string (e.g. '20 mg', '1 tab')"
+        },
+        "frequency": {
+            "type": "string",
+            "description": "Dosing frequency (e.g. 'daily', 'BID', 'TID')"
+        },
+        "list_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date the medication was added to the list (YYYY-MM-DD)"
+        },
+        "status": {
+            "type": "string",
+            "enum": ["active", "inactive", "discontinued", "unknown"],
+            "description": "Current medication status"
+        }
+    },
+    "additionalProperties": false
+}
