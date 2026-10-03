@@ -61,11 +61,13 @@
                     "category": {
                         "type": "string",
                         "enum": [
+                            "problem",
                             "medication",
                             "condition",
-                            "observation",
-                            "symptom",
-                            "procedure"
+                            "lab_result",
+                            "vital_sign",
+                            "allergy",
+                            "observation"
                         ]
                     },
                     "concept": {
@@ -90,7 +92,7 @@
                     },
                     "assertion": {
                         "type": "string",
-                        "enum": ["present", "absent", "uncertain"]
+                        "enum": ["present", "absent", "possible"]
                     },
                     "temporality": {
                         "type": "string",
