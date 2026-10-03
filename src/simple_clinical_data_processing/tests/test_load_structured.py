@@ -7,7 +7,6 @@ from pathlib import Path
 
 from simple_clinical_data_processing.process_structured import process_structured
 
-
 # ── Pretty output ────────────────────────────────────────────────────────────
 
 USE_COLOR = sys.stdout.isatty()
@@ -33,7 +32,7 @@ class PrettyResult(unittest.TextTestResult):
 
     def startTest(self, test):
         super().startTest(test)
-        test._checks = []
+        test._checks = []  # pyright: ignore[reportAttributeAccessIssue]
 
     def _report(self, test, symbol, colour):
         name = test._testMethodName.removeprefix("test_").replace("_", " ").title()
@@ -66,7 +65,7 @@ class PrettyResult(unittest.TextTestResult):
 
 
 class PrettyRunner(unittest.TextTestRunner):
-    resultclass = PrettyResult
+    resultclass = PrettyResult  # pyright: ignore[reportAssignmentType]
 
     def run(self, test):
         result = super().run(test)
@@ -94,7 +93,7 @@ class TestLoadStructured(unittest.TestCase):
 
     def ok(self, message):
         """Record a passed check so the runner can display it."""
-        self._checks.append(message)
+        self._checks.append(message)  # pyright: ignore[reportAttributeAccessIssue]
 
     def test_file_type_detection(self):
         """Headers are mapped to the right file type (lab / med / unknown)."""
