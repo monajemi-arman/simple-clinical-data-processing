@@ -3,7 +3,7 @@ import os
 import unittest
 from pathlib import Path
 
-from simple_clinical_data_processing.load_structured import load_structured
+from simple_clinical_data_processing.process_structured import load_structured
 
 
 class TestLoadStructured(unittest.TestCase):
