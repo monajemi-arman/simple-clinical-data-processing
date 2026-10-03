@@ -2,17 +2,17 @@ import json
 import os
 import sys
 from collections import defaultdict
+from functools import lru_cache
+from pathlib import Path
 from typing import cast
 
 from medspacy import load
 from medspacy.target_matcher import TargetMatcher, TargetRule
 
-# Define target rules
-rules = [
-    TargetRule("metformin", "MEDICATION"),
-    TargetRule("pneumonia", "PROBLEM"),
-    TargetRule("chest pain", "PROBLEM"),
-]
+# Resolved relative to this script, so it works regardless of the caller's cwd
+DEFAULT_RULES_PATH = str(
+    Path(__file__).resolve().parent.parent.parent / "config" / "target-rules.json"
+)
 
 
 def load_target_rules(json_path):
@@ -33,13 +33,16 @@ def load_target_rules(json_path):
     return rules
 
 
-# Load the model and add the rules from the JSON file
-nlp = load()
-target_matcher = cast(TargetMatcher, nlp.get_pipe("medspacy_target_matcher"))
-target_matcher.add(load_target_rules("config/target-rules.json"))
+@lru_cache(maxsize=None)
+def get_nlp(rules_path=DEFAULT_RULES_PATH):
+    """Load the medSpaCy model + rules once per rules file (lazy, cached)."""
+    nlp = load()
+    target_matcher = cast(TargetMatcher, nlp.get_pipe("medspacy_target_matcher"))
+    target_matcher.add(load_target_rules(rules_path))
+    return nlp
 
 
-def process_clinical_text(file_path):
+def process_clinical_text(file_path, nlp):
     # Read the file content
     with open(file_path, "r", encoding="utf-8") as file:
         text = file.read()
@@ -110,32 +113,91 @@ def process_clinical_text(file_path):
     return output
 
 
+def collect_input_files(path):
+    """Return a sorted list of file paths for a file or a folder.
+
+    - File: returns [path]
+    - Folder: returns every regular file directly inside it (non-recursive,
+      hidden files skipped).
+    """
+    path = os.fspath(path)
+    if os.path.isfile(path):
+        return [path]
+
+    if os.path.isdir(path):
+        with os.scandir(path) as entries:
+            return sorted(
+                entry.path
+                for entry in entries
+                if entry.is_file() and not entry.name.startswith(".")
+            )
+
+    raise FileNotFoundError(f"Path not found: {path}")
+
+
 def save_output_to_file(output, output_path):
     with open(output_path, "w", encoding="utf-8") as file:
         json.dump(output, file, indent=2)
 
 
-if __name__ == "__main__":
-    import sys
+def process_narrative(input_path, output_path=None, rules_path=DEFAULT_RULES_PATH):
+    """Main entry point: process a clinical text file or a folder of them.
 
-    if len(sys.argv) < 2:
+    Args:
+        input_path: path to a file, or to a folder (all files directly inside
+            it are processed).
+        output_path: optional path; if given, the result list is also written
+            there as JSON.
+        rules_path: JSON file with the target rules (defaults to
+            config/target-rules.json next to this script).
+
+    Returns:
+        A list of result dicts, one per processed file (a one-element list for
+        a single file). Files that can't be read/processed are reported on
+        stderr and skipped.
+
+    Raises:
+        FileNotFoundError: if input_path doesn't exist.
+    """
+    files = collect_input_files(input_path)  # raises FileNotFoundError
+    nlp = get_nlp(os.fspath(rules_path))
+
+    results = []
+    for file_path in files:
+        try:
+            results.append(process_clinical_text(file_path, nlp))
+        except Exception as e:  # e.g. binary/non-UTF-8 files
+            print(f"Skipping {file_path}: {e}", file=sys.stderr)
+
+    if output_path:
+        save_output_to_file(results, os.fspath(output_path))
+
+    return results
+
+
+def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
+    if not argv:
         print(
-            "Usage: python process_clinical_data.py <input_file_path> [output_file_path]"
+            "Usage: python process_narrative.py <input_file_or_folder> [output_file_path]"
         )
-        sys.exit(1)
+        return 1
 
-    input_file_path = sys.argv[1]
-    output_file_path = None
-    if len(sys.argv) > 2:
-        output_file_path = sys.argv[2]
+    input_path = argv[0]
+    output_path = argv[1] if len(argv) > 1 else None
 
-    if not os.path.exists(input_file_path):
-        print(f"File not found: {input_file_path}")
-        sys.exit(1)
+    try:
+        results = process_narrative(input_path, output_path)
+    except FileNotFoundError as e:
+        print(e)
+        return 1
 
-    result = process_clinical_text(input_file_path)
-    if output_file_path:
-        save_output_to_file(result, output_file_path)
-        print(f"Output saved to {output_file_path}")
+    if output_path:
+        print(f"Output saved to {output_path} ({len(results)} document(s))")
     else:
-        print(json.dumps(result, indent=2))
+        print(json.dumps(results, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
