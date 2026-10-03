@@ -16,6 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 DEFAULT_RULES_PATH = str(PROJECT_ROOT / "config" / "target-rules.json")
 DEFAULT_INPUT_PATH = str(PROJECT_ROOT / "data" / "narrative")
 
+
 def load_target_rules(json_path):
     with open(json_path, "r", encoding="utf-8") as f:
         config = json.load(f)
@@ -82,23 +83,28 @@ def process_clinical_text(file_path, nlp):
 
     # Extract clinical facts
     for ent in doc.ents:
-        if ent.label_ in ["MEDICATION", "PROBLEM"]:
-            fact = {
-                "category": ent.label_.lower(),
-                "concept": {"system": None, "code": None, "display": ent.text},
-                "value": {"number": None, "text": ent.text, "unit": None},
-                "assertion": "present",
-                "temporality": "current",
-                "effective_time": None,
-                "source_ref": {
-                    "document_id": file_path,
-                    "field_path": f"{ent.label_.lower()}_{ent.id}",
-                    "text_span": ent.text,
-                },
-                "extraction_method": "model",
-                "review_status": "needs_review",
-            }
-            output["facts"].append(fact)
+        assertion = "present"
+        if ent._.is_negated:
+            assertion = "absent"
+        elif ent._.is_uncertain:
+            assertion = "possible"
+
+        fact = {
+            "category": ent.label_.lower(),
+            "concept": {"system": None, "code": None, "display": ent.text},
+            "value": {"number": None, "text": ent.text, "unit": None},
+            "assertion": assertion,
+            "temporality": "current",
+            "effective_time": None,
+            "source_ref": {
+                "document_id": file_path,
+                "field_path": f"{ent.label_.lower()}_{ent.start_char}",
+                "text_span": ent.text,
+            },
+            "extraction_method": "model",
+            "review_status": "needs_review",
+        }
+        output["facts"].append(fact)
 
     # Validate against the schema
     required_fields = {
