@@ -43,7 +43,7 @@ _MED_COLUMNS: frozenset[str] = frozenset(
     meds_schema["required"]
 )
 
-_STRUCTURED_DIR = Path(__file__).parent.parent.parent.parent / "data" / "structured"
+_STRUCTURED_DIR = Path(__file__).parent.parent.parent / "data" / "structured"
 
 # ── public result types ──────────────────────────────────────────────────────
 
@@ -55,6 +55,18 @@ MedRow = dict[str, Any]   # keys match meds-schema.json properties + "_warnings"
 class StructuredData:
     labs: list[LabRow] = field(default_factory=list)
     meds: list[MedRow] = field(default_factory=list)
+
+    @staticmethod
+    def _detect_type(headers: list[str]) -> str | None:
+        return _detect_type(headers)
+
+    @staticmethod
+    def _validate_lab_row(row: dict[str, str], file_name: str, line: int) -> LabRow:
+        return _validate_lab_row(row, file_name, line)
+
+    @staticmethod
+    def _validate_med_row(row: dict[str, str], file_name: str, line: int) -> MedRow:
+        return _validate_med_row(row, file_name, line)
 
 
 # ── exceptions ───────────────────────────────────────────────────────────────
@@ -110,8 +122,8 @@ def _validate_lab_row(row: dict[str, str], file_name: str, line: int) -> LabRow:
     # required non-empty fields
     for col in labs_schema["required"]:
         raw = row.get(col, "").strip()
-        if col in ("result_value", "result_unit"):
-            # these are allowed to be empty/non-numeric — handled below
+        if col == "result_unit":
+            # result_unit is optional
             pass
         elif not raw:
             raise ValidationError(
@@ -189,7 +201,7 @@ def _validate_med_row(row: dict[str, str], file_name: str, line: int) -> MedRow:
     out["status"] = raw_status
     if raw_status not in _MED_STATUS_ENUM:
         warnings.append(
-            f"status '{raw_status}' is not one of {sorted(_MED_STATUS_ENUM)}"
+            f"status '{raw_status}' is not one of {meds_schema['properties']['status']['enum']}"
         )
 
     return out

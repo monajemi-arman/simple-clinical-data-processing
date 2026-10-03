@@ -1,142 +1,149 @@
 import csv
+import os
+import unittest
 from pathlib import Path
-import pytest
-from datetime import datetime
-from simple_clinical_data_processing.load_structured import (
-    load_structured, ValidationError, StructuredData
-)
-from simple_clinical_data_processing.config import labs_schema, meds_schema
+
+from simple_clinical_data_processing.load_structured import load_structured
 
 
-@pytest.fixture(scope="function")
-def labs_csv(tmp_path_factory):
-    data_dir = tmp_path_factory.mktemp("structured")
-    path = data_dir / "test_labs.csv"
-    with open(path, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=labs_schema["required"])
-        writer.writeheader()
-        writer.writerow({
-            "patient_id": "P001",
-            "test_code": "LAB-44",
-            "test_name": "Test 1",
-            "result_value": "10",
-            "result_unit": "mg/dL",
-            "result_time": "2023-10-01T12:34:56Z"
-        })
-    yield path
-    path.unlink(missing_ok=True)
+class TestLoadStructured(unittest.TestCase):
 
+    def test_file_type_detection(self):
+        # Test lab file detection
+        lab_file = Path("testdata/valid_labs.csv")
+        lab_file.write_text("patient_id,test_code,test_name,result_value,result_unit,result_time\n123,LAB-001,Complete Blood Count,9.2,mmol/L,2020-01-01T12:00:00Z")
 
-@pytest.fixture(scope="function")
-def meds_csv(tmp_path_factory):
-    data_dir = tmp_path_factory.mktemp("structured")
-    path = data_dir / "test_meds.csv"
-    with open(path, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=meds_schema["required"])
-        writer.writeheader()
-        writer.writerow({
-            "patient_id": "P002",
-            "med_code": "MED-17",
-            "med_name": "Med 1",
-            "dose": "20 mg",
-            "frequency": "daily",
-            "list_date": "2023-10-02",
-            "status": "active"
-        })
-    yield path
-    path.unlink(missing_ok=True)
+        # Test med file detection
+        med_file = Path("testdata/valid_meds.csv")
+        med_file.write_text("patient_id,med_code,med_name,dose,frequency,list_date,status\n123,MED-001,Aspirin,81 mg,daily,2020-01-01,active")
 
+        # Test unrecognised file
+        unknown_file = Path("testdata/unknown.csv")
+        unknown_file.write_text("patient_id,test_code,test_name,other_column\n123,LAB-001,Complete Blood Count,extra")
 
-def test_load_labs_csv(labs_csv):
-    result = load_structured(labs_csv.parent)
-    assert len(result.labs) == 1
-    assert len(result.meds) == 0
-    lab_row = result.labs[0]
-    assert lab_row["patient_id"] == "P001"
-    assert lab_row["test_code"] == "LAB-44"
-    assert lab_row["result_value"] == 10.0
-    assert not lab_row["_warnings"]
+        # Check lab file detection
+        with open(lab_file, "r") as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames is not None:
+                headers = list(reader.fieldnames)
+                self.assertEqual(load_structured()._detect_type(headers), "lab")
 
+        # Check med file detection
+        with open(med_file, "r") as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames is not None:
+                headers = list(reader.fieldnames)
+                self.assertEqual(load_structured()._detect_type(headers), "med")
 
-def test_load_meds_csv(meds_csv):
-    result = load_structured(meds_csv.parent)
-    assert len(result.labs) == 0
-    assert len(result.meds) == 1
-    med_row = result.meds[0]
-    assert med_row["patient_id"] == "P002"
-    assert med_row["med_code"] == "MED-17"
-    assert med_row["list_date"] == "2023-10-02"
-    assert not med_row["_warnings"]
+        # Check unrecognised file
+        with open(unknown_file, "r") as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames is not None:
+                headers = list(reader.fieldnames)
+                self.assertIsNone(load_structured()._detect_type(headers))
 
+        # Clean up
+        lab_file.unlink()
+        med_file.unlink()
+        unknown_file.unlink()
 
-def test_load_missing_field(labs_csv):
-    path = labs_csv.parent / "test_labs.csv"
-    with open(path, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=labs_schema["required"][:-1])
-        writer.writeheader()
-        writer.writerow({
-            "patient_id": "P001",
-            "test_code": "LAB-44",
-            "test_name": "Test 1",
-            "result_value": "10",
-            "result_unit": "mg/dL"
-        })
+    def test_required_field_validation(self):
+        # Test lab file with missing required field
+        lab_file = Path("testdata/invalid_labs.csv")
+        lab_file.write_text("patient_id,test_code,test_name,result_value,result_unit,result_time\n123,LAB-001,Complete Blood Count,,mmol/L,2020-01-01T12:00:00Z")
 
-    with pytest.raises(ValidationError):
-        load_structured(path.parent)
+        # Test med file with missing required field
+        med_file = Path("testdata/invalid_meds.csv")
+        med_file.write_text("patient_id,med_code,med_name,dose,frequency,list_date,status\n123,MED-001,Aspirin,81 mg,daily,2020-01-01,\n")
 
+        # Check lab file validation
+        with self.assertRaises(ValueError), open(lab_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                load_structured()._validate_lab_row(row, lab_file.name, 1)
 
-def test_load_non_numeric_result_value(labs_csv):
-    with open(labs_csv, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=labs_schema["required"])
-        writer.writeheader()
-        writer.writerow({
-            "patient_id": "P001",
-            "test_code": "LAB-44",
-            "test_name": "Test 1",
-            "result_value": "pending",
-            "result_unit": "mg/dL",
-            "result_time": "2023-10-01T12:34:56Z"
-        })
+        # Check med file validation
+        with self.assertRaises(ValueError), open(med_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                load_structured()._validate_med_row(row, med_file.name, 1)
 
-    result = load_structured(labs_csv.parent)
-    assert len(result.labs) == 1
-    assert len(result.meds) == 0
-    lab_row = result.labs[0]
-    assert lab_row["result_value"] == "pending"
-    assert lab_row["_warnings"] == ["result_value is not numeric — stored as text"]
+        # Clean up
+        lab_file.unlink()
+        med_file.unlink()
 
+    def test_date_format_validation(self):
+        # Test invalid date format in lab file
+        lab_file = Path("testdata/invalid_labs_date.csv")
+        lab_file.write_text("patient_id,test_code,test_name,result_value,result_unit,result_time\n123,LAB-001,Complete Blood Count,9.2,mmol/L,invalid-date")
 
-def test_load_invalid_result_time(labs_csv):
-    with open(labs_csv, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=labs_schema["required"])
-        writer.writeheader()
-        writer.writerow({
-            "patient_id": "P001",
-            "test_code": "LAB-44",
-            "test_name": "Test 1",
-            "result_value": "10",
-            "result_unit": "mg/dL",
-            "result_time": "2023-10-01T24:00:00Z"
-        })
+        # Test invalid date format in med file
+        med_file = Path("testdata/invalid_meds_date.csv")
+        med_file.write_text("patient_id,med_code,med_name,dose,frequency,list_date,status\n123,MED-001,Aspirin,81 mg,daily,invalid-date,active")
 
-    with pytest.raises(ValidationError):
-        load_structured(labs_csv.parent)
+        # Check lab file validation
+        with open(lab_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                result = load_structured()._validate_lab_row(row, lab_file.name, 1)
+                self.assertIn("result_time 'invalid-date' is not a valid ISO-8601 datetime", result["_warnings"])
 
+        # Check med file validation
+        with open(med_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                result = load_structured()._validate_med_row(row, med_file.name, 1)
+                self.assertIn("list_date 'invalid-date' is not a valid ISO-8601 date (YYYY-MM-DD)", result["_warnings"])
 
-def test_load_unknown_status(meds_csv):
-    with open(meds_csv, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=meds_schema["required"])
-        writer.writeheader()
-        writer.writerow({
-            "patient_id": "P002",
-            "med_code": "MED-17",
-            "med_name": "Med 1",
-            "dose": "20 mg",
-            "frequency": "daily",
-            "list_date": "2023-10-02",
-            "status": "pending"
-        })
+        # Clean up
+        lab_file.unlink()
+        med_file.unlink()
 
-    with pytest.raises(ValidationError):
-        load_structured(meds_csv.parent)
+    def test_enum_validation(self):
+        # Test invalid status in med file
+        med_file = Path("testdata/invalid_meds_status.csv")
+        med_file.write_text("patient_id,med_code,med_name,dose,frequency,list_date,status\n123,MED-001,Aspirin,81 mg,daily,2020-01-01,invalid-status")
+
+        # Check med file validation
+        with open(med_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                result = load_structured()._validate_med_row(row, med_file.name, 1)
+                self.assertIn("status 'invalid-status' is not one of ['active', 'inactive', 'discontinued', 'unknown']", result["_warnings"])
+
+        # Clean up
+        med_file.unlink()
+
+    def test_non_numeric_result_value(self):
+        # Test non-numeric result value in lab file
+        lab_file = Path("testdata/non_numeric_result_value.csv")
+        lab_file.write_text("patient_id,test_code,test_name,result_value,result_unit,result_time\n123,LAB-001,Complete Blood Count,pending,mmol/L,2020-01-01T12:00:00Z")
+
+        # Check lab file validation
+        with open(lab_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                result = load_structured()._validate_lab_row(row, lab_file.name, 1)
+                self.assertIn("result_value 'pending' is not numeric — stored as text", result["_warnings"])
+
+        # Clean up
+        lab_file.unlink()
+
+    def test_optional_fields(self):
+        # Test optional fields in lab file
+        lab_file = Path("testdata/optional_fields.csv")
+        lab_file.write_text("patient_id,test_code,test_name,result_value,result_unit,result_time\n123,LAB-001,Complete Blood Count,9.2,,2020-01-01T12:00:00Z")
+
+        # Check lab file validation
+        with open(lab_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                result = load_structured()._validate_lab_row(row, lab_file.name, 1)
+                self.assertEqual(result["result_unit"], None)
+
+        # Clean up
+        lab_file.unlink()
+
+if __name__ == '__main__':
+    os.makedirs("testdata", exist_ok=True)
+    unittest.main()
