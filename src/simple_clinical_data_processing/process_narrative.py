@@ -2,7 +2,7 @@ import json
 import os
 import sys
 from collections import defaultdict
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 from typing import cast
 
@@ -10,10 +10,11 @@ from medspacy import load
 from medspacy.target_matcher import TargetMatcher, TargetRule
 
 # Resolved relative to this script, so it works regardless of the caller's cwd
-DEFAULT_RULES_PATH = str(
-    Path(__file__).resolve().parent.parent.parent / "config" / "target-rules.json"
-)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
+# Resolved relative to this script, so it works regardless of the caller's cwd
+DEFAULT_RULES_PATH = str(PROJECT_ROOT / "config" / "target-rules.json")
+DEFAULT_INPUT_PATH = str(PROJECT_ROOT / "data" / "narrative")
 
 def load_target_rules(json_path):
     with open(json_path, "r", encoding="utf-8") as f:
@@ -33,7 +34,7 @@ def load_target_rules(json_path):
     return rules
 
 
-@lru_cache(maxsize=None)
+@cache
 def get_nlp(rules_path=DEFAULT_RULES_PATH):
     """Load the medSpaCy model + rules once per rules file (lazy, cached)."""
     nlp = load()
@@ -140,7 +141,11 @@ def save_output_to_file(output, output_path):
         json.dump(output, file, indent=2)
 
 
-def process_narrative(input_path, output_path=None, rules_path=DEFAULT_RULES_PATH):
+def process_narrative(
+    input_path=DEFAULT_INPUT_PATH,
+    output_path=None,
+    rules_path=DEFAULT_RULES_PATH,
+):
     """Main entry point: process a clinical text file or a folder of them.
 
     Args:
@@ -166,7 +171,7 @@ def process_narrative(input_path, output_path=None, rules_path=DEFAULT_RULES_PAT
     for file_path in files:
         try:
             results.append(process_clinical_text(file_path, nlp))
-        except Exception as e:  # e.g. binary/non-UTF-8 files
+        except Exception as e:  # e.g. binary/non-UTF-8 files  # noqa: BLE001
             print(f"Skipping {file_path}: {e}", file=sys.stderr)
 
     if output_path:
