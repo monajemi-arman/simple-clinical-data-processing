@@ -1,4 +1,4 @@
-from load_structured import load_structured
+from simple_clinical_data_processing.load_structured import load_structured
 
 
 def main():

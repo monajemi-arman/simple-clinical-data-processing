@@ -1,0 +1,660 @@
+{
+  "target_rules": [
+    {
+      "literal": "hemoglobin",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(hemoglobin|haemoglobin|hgb|hb)\\b"
+    },
+    {
+      "literal": "creatinine",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(creatinine|creat|scr|s\\.?cr)\\b"
+    },
+    {
+      "literal": "potassium",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(potassium|k\\+)\\b"
+    },
+    {
+      "literal": "sodium",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(sodium|na\\+)\\b"
+    },
+    {
+      "literal": "urea",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(urea|bun|blood urea nitrogen)\\b"
+    },
+    {
+      "literal": "egfr",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(egfr|gfr)\\b"
+    },
+    {
+      "literal": "white blood cell count",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(wbc|white blood cells?|white cell count|leuk?ocytes)\\b"
+    },
+    {
+      "literal": "platelets",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(platelets?|plt|thrombocytes)\\b"
+    },
+    {
+      "literal": "hematocrit",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(hematocrit|haematocrit|hct)\\b"
+    },
+    {
+      "literal": "glucose",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(glucose|blood sugar|rbs|fbs|fbg)\\b"
+    },
+    {
+      "literal": "hba1c",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(hba1c|a1c|glycated hemoglobin|glycosylated hemoglobin)\\b"
+    },
+    {
+      "literal": "crp",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(crp|c-reactive protein)\\b"
+    },
+    {
+      "literal": "troponin",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(troponin|trop|hs-?tn[it]?|cTn[IT]?)\\b"
+    },
+    {
+      "literal": "inr",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(inr|prothrombin time|pt/inr)\\b"
+    },
+    {
+      "literal": "alt",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(alt|sgpt|alanine aminotransferase)\\b"
+    },
+    {
+      "literal": "ast",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(ast|sgot|aspartate aminotransferase)\\b"
+    },
+    {
+      "literal": "bilirubin",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(bilirubin|t\\.?\\s?bili)\\b"
+    },
+    {
+      "literal": "albumin",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(albumin|alb)\\b"
+    },
+    {
+      "literal": "lactate",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(lactate|lactic acid)\\b"
+    },
+    {
+      "literal": "bnp",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(bnp|nt-?pro-?bnp)\\b"
+    },
+    {
+      "literal": "ferritin",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(ferritin)\\b"
+    },
+    {
+      "literal": "tsh",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(tsh|thyroid stimulating hormone)\\b"
+    },
+    {
+      "literal": "d-dimer",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(d-?dimer)\\b"
+    },
+    {
+      "literal": "calcium",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(calcium)\\b"
+    },
+    {
+      "literal": "magnesium",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(magnesium)\\b"
+    },
+    {
+      "literal": "phosphate",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(phosphate|phosphorus)\\b"
+    },
+    {
+      "literal": "esr",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(esr|erythrocyte sedimentation rate)\\b"
+    },
+    {
+      "literal": "ldl",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(ldl|ldl-?c|ldl cholesterol)\\b"
+    },
+    {
+      "literal": "hdl",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(hdl|hdl-?c|hdl cholesterol)\\b"
+    },
+    {
+      "literal": "triglycerides",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(triglycerides?)\\b"
+    },
+    {
+      "literal": "cholesterol",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(total cholesterol|cholesterol)\\b"
+    },
+    {
+      "literal": "mcv",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(mcv|mean corpuscular volume)\\b"
+    },
+    {
+      "literal": "neutrophils",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(neutrophils?|anc)\\b"
+    },
+    {
+      "literal": "lymphocytes",
+      "category": "LAB_RESULT",
+      "pattern": "(?i)\\b(lymphocytes?)\\b"
+    },
+    {
+      "literal": "potassium (K)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "K"
+        }
+      ]
+    },
+    {
+      "literal": "creatinine (Cr)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "Cr"
+        }
+      ]
+    },
+    {
+      "literal": "sodium (Na)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "Na"
+        }
+      ]
+    },
+    {
+      "literal": "hemoglobin (Hb)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "Hb"
+        }
+      ]
+    },
+    {
+      "literal": "calcium (Ca)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "Ca"
+        }
+      ]
+    },
+    {
+      "literal": "magnesium (Mg)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "Mg"
+        }
+      ]
+    },
+    {
+      "literal": "chloride (Cl)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "Cl"
+        }
+      ]
+    },
+    {
+      "literal": "bicarbonate (HCO3)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "HCO3"
+        }
+      ]
+    },
+    {
+      "literal": "urea (Ur)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "Ur"
+        }
+      ]
+    },
+    {
+      "literal": "white blood cell count (WCC)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "WCC"
+        }
+      ]
+    },
+    {
+      "literal": "platelets (Plts)",
+      "category": "LAB_RESULT",
+      "pattern": [
+        {
+          "TEXT": "Plts"
+        }
+      ]
+    },
+    {
+      "literal": "pneumonia",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(pneumonia|lobar pneumonia)\\b"
+    },
+    {
+      "literal": "heart failure",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(chf|hfref|hfpef|heart failure|cardiac failure|congestive heart failure)\\b"
+    },
+    {
+      "literal": "anemia",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(an(a)?emia|iron deficiency)\\b"
+    },
+    {
+      "literal": "chest pain",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(chest pain|angina|chest tightness)\\b"
+    },
+    {
+      "literal": "hypertension",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(hypertension|htn|high blood pressure)\\b"
+    },
+    {
+      "literal": "hypotension",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(hypotension|low blood pressure)\\b"
+    },
+    {
+      "literal": "diabetes mellitus",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(diabetes( mellitus)?|dm2?|t[12]dm|niddm|iddm)\\b"
+    },
+    {
+      "literal": "myocardial infarction",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(myocardial infarction|mi|nstemi|stemi|heart attack)\\b"
+    },
+    {
+      "literal": "atrial fibrillation",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(atrial fibrillation|a-?fib|af)\\b"
+    },
+    {
+      "literal": "stroke",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(stroke|cva|cerebrovascular accident|tia|transient ischemic attack)\\b"
+    },
+    {
+      "literal": "acute kidney injury",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(aki|acute kidney injury|acute renal failure|arf)\\b"
+    },
+    {
+      "literal": "chronic kidney disease",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(ckd|chronic kidney disease|chronic renal failure|esrd)\\b"
+    },
+    {
+      "literal": "copd",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(copd|chronic obstructive pulmonary disease|emphysema)\\b"
+    },
+    {
+      "literal": "asthma",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(asthma)\\b"
+    },
+    {
+      "literal": "sepsis",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(sepsis|septic shock|bacter(a)?emia)\\b"
+    },
+    {
+      "literal": "urinary tract infection",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(uti|urinary tract infection|pyelonephritis|cystitis)\\b"
+    },
+    {
+      "literal": "pulmonary embolism",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(pulmonary embol(ism|us)|pe|dvt|deep vein thrombosis|vte)\\b"
+    },
+    {
+      "literal": "dyspnea",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(dyspn(o)?ea|shortness of breath|sob|breathlessness)\\b"
+    },
+    {
+      "literal": "fever",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(fever|pyrexia|febrile)\\b"
+    },
+    {
+      "literal": "cough",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(cough)\\b"
+    },
+    {
+      "literal": "nausea/vomiting",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(nausea|vomiting|emesis)\\b"
+    },
+    {
+      "literal": "diarrhea",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(diarrh(o)?ea)\\b"
+    },
+    {
+      "literal": "edema",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b((o)?edema|swelling)\\b"
+    },
+    {
+      "literal": "hyperkalemia",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(hyperk(a)?emia)\\b"
+    },
+    {
+      "literal": "hypokalemia",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(hypok(a)?emia)\\b"
+    },
+    {
+      "literal": "hyponatremia",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(hyponat(r)?(a)?emia)\\b"
+    },
+    {
+      "literal": "hyperglycemia",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(hyperglyc(a)?emia)\\b"
+    },
+    {
+      "literal": "hypoglycemia",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(hypoglyc(a)?emia)\\b"
+    },
+    {
+      "literal": "dyslipidemia",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(dyslipid(a)?emia|hyperlipid(a)?emia|hypercholesterol(a)?emia)\\b"
+    },
+    {
+      "literal": "coronary artery disease",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(cad|coronary artery disease|ischemic heart disease|ihd)\\b"
+    },
+    {
+      "literal": "ecg abnormality",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(electrocardiogram findings|ecg changes|st elevation|st depression|t wave inversion|qt prolongation)\\b"
+    },
+    {
+      "literal": "cancer",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(cancer|carcinoma|malignancy|metastas[ei]s)\\b"
+    },
+    {
+      "literal": "depression",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(depression|mdd)\\b"
+    },
+    {
+      "literal": "obesity",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(obesity|obese)\\b"
+    },
+    {
+      "literal": "headache",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(headache|migraine)\\b"
+    },
+    {
+      "literal": "abdominal pain",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(abdominal pain|stomach pain)\\b"
+    },
+    {
+      "literal": "bleeding",
+      "category": "PROBLEM",
+      "pattern": "(?i)\\b(bleeding|h(a)?emorrhage|melena|hematuria)\\b"
+    },
+    {
+      "literal": "metformin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(metformin|glucophage)\\b",
+      "attributes": {
+        "rxnorm": "6809"
+      }
+    },
+    {
+      "literal": "warfarin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(warfarin|coumadin)\\b",
+      "attributes": {
+        "rxnorm": "11289"
+      }
+    },
+    {
+      "literal": "apixaban",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(apixaban|eliquis)\\b",
+      "attributes": {
+        "rxnorm": "1364430"
+      }
+    },
+    {
+      "literal": "rivaroxaban",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(rivaroxaban|xarelto)\\b",
+      "attributes": {
+        "rxnorm": "1114195"
+      }
+    },
+    {
+      "literal": "metoprolol",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(metoprolol|lopressor|toprol)\\b",
+      "attributes": {
+        "rxnorm": "6918"
+      }
+    },
+    {
+      "literal": "aspirin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(aspirin|asa|acetylsalicylic acid)\\b",
+      "attributes": {
+        "rxnorm": "1191"
+      }
+    },
+    {
+      "literal": "clopidogrel",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(clopidogrel|plavix)\\b",
+      "attributes": {
+        "rxnorm": "32968"
+      }
+    },
+    {
+      "literal": "atorvastatin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(atorvastatin|lipitor)\\b",
+      "attributes": {
+        "rxnorm": "83367"
+      }
+    },
+    {
+      "literal": "lisinopril",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(lisinopril)\\b",
+      "attributes": {
+        "rxnorm": "29046"
+      }
+    },
+    {
+      "literal": "amlodipine",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(amlodipine|norvasc)\\b",
+      "attributes": {
+        "rxnorm": "17767"
+      }
+    },
+    {
+      "literal": "furosemide",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(furosemide|frusemide|lasix)\\b",
+      "attributes": {
+        "rxnorm": "4603"
+      }
+    },
+    {
+      "literal": "insulin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(insulin|glargine|lispro|aspart)\\b",
+      "attributes": {
+        "rxnorm": "5856"
+      }
+    },
+    {
+      "literal": "heparin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(heparin|enoxaparin|lovenox)\\b"
+    },
+    {
+      "literal": "omeprazole",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(omeprazole|pantoprazole|ppi)\\b"
+    },
+    {
+      "literal": "paracetamol",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(paracetamol|acetaminophen|tylenol)\\b",
+      "attributes": {
+        "rxnorm": "161"
+      }
+    },
+    {
+      "literal": "ibuprofen",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(ibuprofen|nsaids?|naproxen)\\b"
+    },
+    {
+      "literal": "amoxicillin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(amoxicillin|augmentin|co-?amoxiclav)\\b",
+      "attributes": {
+        "rxnorm": "723"
+      }
+    },
+    {
+      "literal": "ceftriaxone",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(ceftriaxone)\\b"
+    },
+    {
+      "literal": "azithromycin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(azithromycin)\\b"
+    },
+    {
+      "literal": "prednisolone",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(prednisolone|prednisone|dexamethasone)\\b"
+    },
+    {
+      "literal": "bisoprolol",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(bisoprolol)\\b"
+    },
+    {
+      "literal": "ramipril",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(ramipril|enalapril|losartan|valsartan)\\b"
+    },
+    {
+      "literal": "spironolactone",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(spironolactone)\\b"
+    },
+    {
+      "literal": "digoxin",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(digoxin)\\b"
+    },
+    {
+      "literal": "salbutamol",
+      "category": "MEDICATION",
+      "pattern": "(?i)\\b(salbutamol|albuterol|ventolin)\\b"
+    },
+    {
+      "literal": "allergy to drug",
+      "category": "ALLERGY",
+      "pattern": "(?i)\\b(allerg(y|ic|ies)\\s+(to\\s+)?[a-z\\-]+|[a-z\\-]+\\s+allergy|nkda|nka|no known (drug )?allerg(y|ies))\\b"
+    },
+    {
+      "literal": "allergy to penicillin",
+      "category": "ALLERGY",
+      "pattern": "(?i)\\b(allerg(y|ic)\\s+to\\s+penicillin|penicillin\\s+allerg(y|ic))\\b"
+    },
+    {
+      "literal": "blood pressure",
+      "category": "VITAL_SIGN",
+      "pattern": "(?i)\\b(blood pressure|bp)\\b"
+    },
+    {
+      "literal": "heart rate",
+      "category": "VITAL_SIGN",
+      "pattern": "(?i)\\b(heart rate|hr|pulse)\\b"
+    },
+    {
+      "literal": "oxygen saturation",
+      "category": "VITAL_SIGN",
+      "pattern": "(?i)\\b(spo2|o2 sat(uration)?s?|oxygen saturation)\\b"
+    },
+    {
+      "literal": "temperature",
+      "category": "VITAL_SIGN",
+      "pattern": "(?i)\\b(temperature|temp)\\b"
+    },
+    {
+      "literal": "respiratory rate",
+      "category": "VITAL_SIGN",
+      "pattern": "(?i)\\b(respiratory rate|rr)\\b"
+    }
+  ]
+}

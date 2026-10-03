@@ -28,7 +28,7 @@ from __future__ import annotations
 import csv
 import re
 from dataclasses import dataclass, field
-from datetime import datetime, date
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -87,7 +87,7 @@ def _is_valid_datetime(value: str) -> bool:
     if not _ISO_DATETIME_RE.match(value):
         return False
     try:
-        datetime.fromisoformat(value.rstrip("Z").replace("Z", "+00:00"))
+        datetime.fromisoformat(value.rstrip("Z"))
         return True
     except ValueError:
         return False
@@ -137,7 +137,7 @@ def _validate_lab_row(row: dict[str, str], file_name: str, line: int) -> LabRow:
     # result_value: try numeric, fall back to string
     raw_value = row.get("result_value", "").strip()
     if not raw_value:
-        warnings.append(f"result_value is empty")
+        warnings.append("result_value is empty")
         out["result_value"] = None
     else:
         try:
