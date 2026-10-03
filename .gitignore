@@ -1,0 +1,29 @@
+## Project specific
+testdata/
+
+## Ignore Python build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+## Ignore virtual environment
+venv/
+.env
+
+## Ignore pytest temporary files
+.pytest_cache/
+
+## Ignore other common files
+*.swp
+*.swo
+*.swx
+
+## Ignore IDE files
+*.idea
+*.project
+*.vscode
+
+## Ignore OS generated files
+.DS_Store
+Thumbs.db
