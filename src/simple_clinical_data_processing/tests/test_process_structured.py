@@ -93,6 +93,8 @@ class TestLoadStructured(unittest.TestCase):
 
     def ok(self, message):
         """Record a passed check so the runner can display it."""
+        if not hasattr(self, "_checks"):
+            self._checks = []
         self._checks.append(message)  # pyright: ignore[reportAttributeAccessIssue]
 
     def test_file_type_detection(self):
