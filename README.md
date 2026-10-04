@@ -14,3 +14,6 @@ Run the tests using pytest:
 ```
 uv run pytest
 ```
+
+# Demo
+Screenshot of the main script and the generated output jsons are available under demo/ directory.

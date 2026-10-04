@@ -1,0 +1,669 @@
+[
+  {
+    "schema_version": "1.0",
+    "patient": {
+      "source_patient_id": null,
+      "birth_date": null
+    },
+    "encounter": {
+      "source_encounter_id": null,
+      "event_time": null
+    },
+    "facts": [
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "chest pain"
+        },
+        "value": {
+          "number": null,
+          "text": "chest pain",
+          "unit": null
+        },
+        "assertion": "absent",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-204.txt",
+          "field_path": "problem_129",
+          "text_span": "chest pain"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "Shortness of breath"
+        },
+        "value": {
+          "number": null,
+          "text": "Shortness of breath",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-204.txt",
+          "field_path": "problem_141",
+          "text_span": "Shortness of breath"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "medication",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "Apixaban"
+        },
+        "value": {
+          "number": null,
+          "text": "Apixaban",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-204.txt",
+          "field_path": "medication_200",
+          "text_span": "Apixaban"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "lab_result",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "Creatinine"
+        },
+        "value": {
+          "number": null,
+          "text": "Creatinine",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-204.txt",
+          "field_path": "lab_result_256",
+          "text_span": "Creatinine"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "medication",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "rivaroxaban"
+        },
+        "value": {
+          "number": null,
+          "text": "rivaroxaban",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-204.txt",
+          "field_path": "medication_333",
+          "text_span": "rivaroxaban"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      }
+    ],
+    "quality": {
+      "missing_required": [
+        "patient.source_patient_id",
+        "patient.birth_date",
+        "encounter.source_encounter_id",
+        "encounter.event_time"
+      ],
+      "conflicts": [],
+      "warnings": []
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "patient": {
+      "source_patient_id": null,
+      "birth_date": null
+    },
+    "encounter": {
+      "source_encounter_id": null,
+      "event_time": null
+    },
+    "facts": [
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "anaemia"
+        },
+        "value": {
+          "number": null,
+          "text": "anaemia",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "problem_226",
+          "text_span": "anaemia"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "fever"
+        },
+        "value": {
+          "number": null,
+          "text": "fever",
+          "unit": null
+        },
+        "assertion": "absent",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "problem_238",
+          "text_span": "fever"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "cough"
+        },
+        "value": {
+          "number": null,
+          "text": "cough",
+          "unit": null
+        },
+        "assertion": "absent",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "problem_252",
+          "text_span": "cough"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "pneumonia"
+        },
+        "value": {
+          "number": null,
+          "text": "pneumonia",
+          "unit": null
+        },
+        "assertion": "possible",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "problem_268",
+          "text_span": "pneumonia"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "cancer"
+        },
+        "value": {
+          "number": null,
+          "text": "cancer",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "problem_337",
+          "text_span": "cancer"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "allergy",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "Allergic to penicillin"
+        },
+        "value": {
+          "number": null,
+          "text": "Allergic to penicillin",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "allergy_378",
+          "text_span": "Allergic to penicillin"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "medication",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "warfarin"
+        },
+        "value": {
+          "number": null,
+          "text": "warfarin",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "medication_415",
+          "text_span": "warfarin"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "lab_result",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "Hb"
+        },
+        "value": {
+          "number": null,
+          "text": "Hb",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "lab_result_478",
+          "text_span": "Hb"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "lab_result",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "INR"
+        },
+        "value": {
+          "number": null,
+          "text": "INR",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "lab_result_502",
+          "text_span": "INR"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "lab_result",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "Hb"
+        },
+        "value": {
+          "number": null,
+          "text": "Hb",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "lab_result_539",
+          "text_span": "Hb"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "medication",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "Warfarin"
+        },
+        "value": {
+          "number": null,
+          "text": "Warfarin",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "medication_636",
+          "text_span": "Warfarin"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "bleeding"
+        },
+        "value": {
+          "number": null,
+          "text": "bleeding",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "problem_655",
+          "text_span": "bleeding"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "chest pain"
+        },
+        "value": {
+          "number": null,
+          "text": "chest pain",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "problem_694",
+          "text_span": "chest pain"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "shortness of breath"
+        },
+        "value": {
+          "number": null,
+          "text": "shortness of breath",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-205.txt",
+          "field_path": "problem_722",
+          "text_span": "shortness of breath"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      }
+    ],
+    "quality": {
+      "missing_required": [
+        "patient.source_patient_id",
+        "patient.birth_date",
+        "encounter.source_encounter_id",
+        "encounter.event_time"
+      ],
+      "conflicts": [],
+      "warnings": []
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "patient": {
+      "source_patient_id": null,
+      "birth_date": null
+    },
+    "encounter": {
+      "source_encounter_id": null,
+      "event_time": null
+    },
+    "facts": [
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "SOB"
+        },
+        "value": {
+          "number": null,
+          "text": "SOB",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-302_scan_ocr.txt",
+          "field_path": "problem_149",
+          "text_span": "SOB"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "HTN"
+        },
+        "value": {
+          "number": null,
+          "text": "HTN",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-302_scan_ocr.txt",
+          "field_path": "problem_160",
+          "text_span": "HTN"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "medication",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "ASA"
+        },
+        "value": {
+          "number": null,
+          "text": "ASA",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-302_scan_ocr.txt",
+          "field_path": "medication_191",
+          "text_span": "ASA"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "lab_result",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "K"
+        },
+        "value": {
+          "number": null,
+          "text": "K",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-302_scan_ocr.txt",
+          "field_path": "lab_result_208",
+          "text_span": "K"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "lab_result",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "Cr"
+        },
+        "value": {
+          "number": null,
+          "text": "Cr",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-302_scan_ocr.txt",
+          "field_path": "lab_result_235",
+          "text_span": "Cr"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "problem",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "afib"
+        },
+        "value": {
+          "number": null,
+          "text": "afib",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-302_scan_ocr.txt",
+          "field_path": "problem_252",
+          "text_span": "afib"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      },
+      {
+        "category": "medication",
+        "concept": {
+          "system": null,
+          "code": null,
+          "display": "metoprolol"
+        },
+        "value": {
+          "number": null,
+          "text": "metoprolol",
+          "unit": null
+        },
+        "assertion": "present",
+        "temporality": "current",
+        "effective_time": null,
+        "source_ref": {
+          "document_id": "/home/john/Projects/simple-clinical-data-processing/data/narrative/N-302_scan_ocr.txt",
+          "field_path": "medication_320",
+          "text_span": "metoprolol"
+        },
+        "extraction_method": "model",
+        "review_status": "needs_review"
+      }
+    ],
+    "quality": {
+      "missing_required": [
+        "patient.source_patient_id",
+        "patient.birth_date",
+        "encounter.source_encounter_id",
+        "encounter.event_time"
+      ],
+      "conflicts": [],
+      "warnings": []
+    }
+  }
+]
